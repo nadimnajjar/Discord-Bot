@@ -42,9 +42,14 @@ async def gay_rate(ctx,member: discord.Member = None):
 @client.command()
 async def indus(ctx):
     await ctx.send(f"LES INDUS SONT DES IDIOTS IYAA IYAA OHHHHH")
+
 @client.command()
 async def seb_nabih(ctx):
     await ctx.send(f"ayre b nabih")
+
+@client.command()
+async def seb_hadi(ctx):
+    await ctx.send("Ayre b Hadi")
 
 @client.command()
 async def joke(ctx):
