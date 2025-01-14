@@ -80,18 +80,14 @@ async def table(ctx,width:int,*args):
     if len(args) % 2 != 0:
         await ctx.send("Erreur : Vous devez fournir un nombre pair d'arguments (clé-valeur).")
         return
-
-    # Regrouper les arguments en paires clé-valeur
     pairs = [(args[i], args[i + 1]) for i in range(0, len(args), 2)]
     
-    # Créer une table formatée
     table_content = ""
     for i, (key, value) in enumerate(pairs):
         table_content += f"`{key}`: {value}\n"
         if (i + 1) % width == 0:
-            table_content += "\n"  # Ajouter une ligne vide pour séparer les rangées
+            table_content += "\n"  
 
-    # Créer un embed pour afficher la table
     embed = discord.Embed(
         title="Table générée",
         description=table_content,
