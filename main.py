@@ -17,39 +17,9 @@ async def on_ready():
 
 @client.command()
 async def hi(ctx):
-    await ctx.send('LAK HIIIIIIIIII')
-
-@client.command()
-async def seb(ctx, member: discord.Member = None):
-    if member is None:
-        await ctx.send(f"@?")
-    else:
-        await ctx.send(f"Ayre b {member.mention} ")
+    await ctx.send('Hello ! :)')
 
 
-@client.command()
-async def cock_size(ctx,member: discord.Member = None):
-    if member is None:
-        await ctx.send(f"badna n2is er min hbb")
-    else:
-        await ctx.send('8'+'='*random.randint(1,20)+'D')
-@client.command()
-async def gay_rate(ctx,member: discord.Member = None):
-    if member is None:
-        print(f"@?")
-    else:
-        await ctx.send(f'{discord.Member}\'s gayrate is {random.randint(1,100)}%')
-@client.command()
-async def indus(ctx):
-    await ctx.send(f"LES INDUS SONT DES IDIOTS IYAA IYAA OHHHHH")
-
-@client.command()
-async def seb_nabih(ctx):
-    await ctx.send(f"ayre b nabih")
-
-@client.command()
-async def seb_hadi(ctx):
-    await ctx.send("Ayre b Hadi")
 
 @client.command()
 async def joke(ctx):
@@ -67,12 +37,12 @@ async def joke(ctx):
    await channel.send(json.loads(response.text)['data'])
 
 @client.command(pass_context= True)
-async def dhar(ctx):
+async def exit(ctx):
     if (ctx.voice_client):
         await ctx.guild.voice_client.disconnect()
-        await ctx.send("Yalla salam")
+        await ctx.send("BYE!")
     else:
-        await ctx.send("Manne jowa la etla3 ya hmar")
+        await ctx.send("You're not in the voice chat")
 video_queue = []
 is_playing = False
 @client.command
@@ -98,18 +68,18 @@ async def table(ctx,width:int,*args):
 async def play(ctx, url):
     global is_playing
     if ctx.voice_client is None:
-        await ctx.send(f"Ntek foot aal voice chat abel ma t7ot el command ya er")
+        await ctx.send(f"Please enter the voice chat in order for me to join")
         return
     video_queue.append(url)
     if not is_playing:
         await play_next(ctx)
     else:
-        await ctx.send(f"Haye hatayneya bel queue fa rawi2 tizak. Queue: {len(video_queue)}")
+        await ctx.send(f"The song is now in the queue. Queue: {len(video_queue)}")
 async def play_next(ctx):
     global is_playing
 
     if len(video_queue) == 0:
-        await ctx.send("5allasna aghene")
+        await ctx.send("Done with the songs :)")
         is_playing = False
         return
 
@@ -134,7 +104,7 @@ async def play_next(ctx):
             audio_source=FFmpegPCMAudio(url2, options="-vn")
             ctx.voice_client.play(audio_source, after=lambda e: asyncio.run_coroutine_threadsafe(play_next(ctx), client.loop))
 
-            await ctx.send(f"🎶 SHA8EL YA KBIR **{title}**")
+            await ctx.send(f"🎶 Now playing: **{title}**")
     except Exception:
         pass
 
@@ -146,12 +116,12 @@ async def on_voice_state_update(member, before, after):
             if vc:
                 await vc.disconnect()
 @client.command()
-async def sharrif(ctx):
+async def join(ctx):
     if ctx.author.voice:
         channel = ctx.author.voice.channel
         await channel.connect()
-        await ctx.send(f"fetet 3ala {channel}")
+        await ctx.send(f"I'm in {channel}")
     else:
-        await ctx.send("badak tkoon jowa la foot ya hmar")
+        await ctx.send("Please enter the voice chat")
 
 client.run(BOTTOKEN)
